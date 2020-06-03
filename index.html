@@ -1,0 +1,148 @@
+<!doctype html>
+<head>
+  <style>
+  body {
+    background: #f1f1f1;
+  }
+
+  img, canvas {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  hr {
+    margin: 30px 0 20px 0;
+    opacity: 0.5;
+  }
+
+  #user-requests {
+    margin: 30px 0 0 20px;
+  }
+
+  #hint {
+    font-family: sans-serif;
+  }
+
+  #address {
+    width: 600px;
+    height: 30px;
+    padding: 5px 10px;
+  }
+
+  #preview {
+    margin: 20px 0 0 -10px;
+  }
+
+  .label {
+    margin-left: 10px;
+    font-family: monospace;
+    font-size: 14px;
+  }
+
+  .nanoidenticon {
+    display: inline-block;
+  }
+  </style>
+</head>
+<body>
+  <script type="module">
+    import { createIcon } from '../src/nanoidenticons.mjs';
+
+    const addresses = [
+      'nano_3mw19co1ye16pzje45xcezh1p86w9pm9j6ue83aewztnrk873p7khjp4yxrx',
+      'nano_3rw4un6ys57hrb39sy1qx8qy5wukst1iiponztrz9qiz6qqa55kxzx4491or',
+      'nano_3pczxuorp48td8645bs3m6c3xotxd3idskrenmi65rbrga5zmkemzhwkaznh',
+      'nano_3o7uzba8b9e1wqu5ziwpruteyrs3scyqr761x7ke6w1xctohxfh5du75qgaj',
+      'nano_1brainb3zz81wmhxndsbrjb94hx3fhr1fyydmg6iresyk76f3k7y7jiazoji',
+      'nano_1iuz18n4g4wfp9gf7p1s8qkygxw7wx9qfjq6a9aq68uyrdnningdcjontgar',
+    ];
+
+    for(let i = 0; i < 128; i++) {
+      addresses.push(
+        Math.floor(Math.random() * Math.pow(10,10)).toString(16)
+        + Math.floor(Math.random() * Math.pow(10,10)).toString(16)
+        + Math.floor(Math.random() * Math.pow(10,10)).toString(16)
+        + Math.floor(Math.random() * Math.pow(10,10)).toString(16)
+      );
+    }
+
+    const samplesElement = document.getElementById('samples')
+
+    for(let i = 0; i < addresses.length; i++) {
+      const seed = addresses[i].toLowerCase();
+
+      const canvas = createIcon({
+        seed,
+        scale: 14
+      });
+
+      samplesElement.appendChild(canvas)
+    }
+
+    const addressInputElement = document.getElementById('address')
+    const previewElement = document.getElementById('preview')
+
+    const NANO_ADDRESS_REGEX = /^(nano|xrb)_[13]{1}[13456789abcdefghijkmnopqrstuwxyz]{59}$/g
+
+    const onInputOrPaste = (evt) => {
+      setTimeout(() =>
+        {
+          const seed = addressInputElement.value
+
+          if( NANO_ADDRESS_REGEX.test(seed) !== true ) {
+            return
+          }
+
+          while(previewElement.firstChild) {
+            previewElement.removeChild(previewElement.lastChild);
+          }
+
+          const contentsElement = document.createElement('div')
+          contentsElement.classList.add('contents')
+
+          const SCALES = [20, 8, 3]
+
+          SCALES.forEach(
+            (scale) => {
+              const imageContainer = document.createElement('div')
+              imageContainer.classList.add('nanoidenticon')
+
+              const canvas = createIcon({
+                seed,
+                scale: scale
+              });
+
+              imageContainer.appendChild(canvas)
+
+              contentsElement.appendChild(imageContainer)
+            }
+          )
+
+          const labelElement = document.createElement('p')
+          labelElement.classList.add('label')
+          labelElement.innerText = seed
+          contentsElement.appendChild(labelElement)
+
+          previewElement.appendChild(contentsElement)
+        },
+        0
+      )
+    }
+
+    addressInputElement.addEventListener('input', onInputOrPaste)
+    addressInputElement.addEventListener('paste', onInputOrPaste)
+  </script>
+  <div id="user-requests">
+    <p id="hint">Enter a public Nano address to view its identicon:</p>
+    <input
+      type="text"
+      id="address"
+      placeholder="nano_1234..."
+      spellcheck="false"
+      required
+    >
+    <div id="preview"></div>
+  </div>
+  <hr>
+  <div id="samples"></div>
+</body>
