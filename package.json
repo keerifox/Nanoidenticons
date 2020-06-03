@@ -1,0 +1,31 @@
+{
+  "name": "@keerifox/nanoidenticons",
+  "version": "1.0.0",
+  "description": "A tiny library for generating Nano address identicons.",
+  "main": "dist/nanoidenticons.js",
+  "module": "src/nanoidenticons.mjs",
+  "scripts": {
+    "build": "rollup -f cjs src/nanoidenticons.mjs -o dist/nanoidenticons.js && minify dist/nanoidenticons.js -o dist/nanoidenticons.min.js",
+    "serve-examples": "node --experimental-modules examples/server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keerifox/nanoidenticons.git"
+  },
+  "author": "keerifox, Erin Dachtler, Alex Van de Sande",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/keerifox/nanoidenticons/issues"
+  },
+  "homepage": "https://github.com/keerifox/nanoidenticons#readme",
+  "devDependencies": {
+    "babel-minify": "^0.4.3",
+    "koa": "^2.5.2",
+    "koa-static": "^5.0.0",
+    "rollup": "^0.64.1"
+  },
+  "files": [
+    "src/",
+    "dist/"
+  ]
+}
