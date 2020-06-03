@@ -11,7 +11,7 @@ Browser
 ---
 
 ```javascript
-import { createIcon } from '@download/blockies';
+import { createIcon } from '@keerifox/nanoidenticons';
 
 var icon = createIcon({
     seed: 'nano_1234...', // seed used to generate icon data, default: random
@@ -28,7 +28,7 @@ Node
 
 ```javascript
 import { createCanvas } from 'canvas'; 
-import { renderIcon } from '@download/blockies';
+import { renderIcon } from '@keerifox/nanoidenticons';
 
 const canvas = createCanvas(128, 128);
 
