@@ -5,7 +5,7 @@ A tiny library for generating identicons, based on [Blockies](https://github.com
 
 ![Preview](examples/sample.png "Nanoidenticons")
 
-[**Demo page**](http://keerifox.github.io/nanoidenticons/)
+[**Demo page**](https://keerifox.github.io/Nanoidenticons/)
 
 Browser
 ---
