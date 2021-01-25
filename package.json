@@ -1,6 +1,6 @@
 {
   "name": "@keerifox/nanoidenticons",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A tiny library for generating Nano address identicons.",
   "main": "dist/nanoidenticons.js",
   "module": "src/nanoidenticons.mjs",
