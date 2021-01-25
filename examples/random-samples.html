@@ -42,6 +42,19 @@
   .nanoidenticon {
     display: inline-block;
   }
+
+  .nanoidenticon.scale-20 > canvas {
+    border-radius: 10px;
+  }
+  .nanoidenticon.scale-14 > canvas {
+    border-radius: 6px;
+  }
+  .nanoidenticon.scale-8 > canvas {
+    border-radius: 3px;
+  }
+  .nanoidenticon.scale-3 > canvas {
+    border-radius: 2px;
+  }
   </style>
 </head>
 <body>
@@ -71,12 +84,17 @@
     for(let i = 0; i < addresses.length; i++) {
       const seed = addresses[i].toLowerCase();
 
+      const imageContainer = document.createElement('div')
+      imageContainer.classList.add('nanoidenticon', 'scale-14')
+
       const canvas = createIcon({
         seed,
         scale: 14
       });
 
-      samplesElement.appendChild(canvas)
+      imageContainer.appendChild(canvas)
+
+      samplesElement.appendChild(imageContainer)
     }
 
     const addressInputElement = document.getElementById('address')
@@ -105,7 +123,7 @@
           SCALES.forEach(
             (scale) => {
               const imageContainer = document.createElement('div')
-              imageContainer.classList.add('nanoidenticon')
+              imageContainer.classList.add( 'nanoidenticon', ('scale-' + scale) )
 
               const canvas = createIcon({
                 seed,
