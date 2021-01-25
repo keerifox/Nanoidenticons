@@ -1,7 +1,7 @@
 Nanoidenticons
 ========
 
-A tiny library for generating identicons, based on [Blockies](https://github.com/download13/blockies).
+A small library for generating identicons, based on [Blockies](https://github.com/download13/blockies).
 
 ![Preview](examples/sample.png "Nanoidenticons")
 
